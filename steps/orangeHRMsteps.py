@@ -3,16 +3,17 @@ from selenium import webdriver
 
 @given(u'launch chrome webrowser')
 def launch_browser(context):
-    raise NotImplementedError(u'STEP: Given launch chrome webrowser')
+    context.driver = webdriver.Chrome()
 
 @when(u'open OrangeHRM homepage')
 def open_homepage(context):
-    raise NotImplementedError(u'STEP: When open OrangeHRM homepage')
+    context.driver.get('https://opensource-demo.orangehrmlive.com/')
 
 @then(u'verify that logo is present in the page')
 def check_logo(context):
-    raise NotImplementedError(u'STEP: Then verify that logo is present in the page')
+    status = context.driver.find_element_by_xpath("//*[@id='divLogo']/img").is_displayed()
+    assert status is True
 
 @then(u'close browser')
 def close_browser(context):
-    raise NotImplementedError(u'STEP: Then close browser')
+    context.driver.close()
